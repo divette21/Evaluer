@@ -57,58 +57,53 @@
     .card:hover {transform: translateY(-5px);}
     .card img {width: 100%; display: block;}
     .card-content {padding: 20px;}
-    .portfolio-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+    }
+    .portfolio-item {
       position: relative;
-    }
-    .portfolio-card {
-      flex: 0 0 auto;
-      width: 150px;
-      height: 100px;
-      transition: transform 0.5s ease;
+      overflow: hidden;
       border-radius: 10px;
-    }
-    .portfolio-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    .portfolio-main {
-      width: 300px;
-      height: 200px;
-      border-radius: 15px;
-      transition: transform 0.5s ease;
-    }
-    .portfolio-main img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 15px;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: white;
-      font-size: 2rem;
-      padding: 10px;
-      border: none;
       cursor: pointer;
-      z-index: 10;
+      transition: transform 0.3s;
     }
-    .prev {
-      left: 0;
+    .portfolio-item:hover {
+      transform: scale(1.03);
     }
-    .next {
-      right: 0;
+    .portfolio-item img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
     }
+    .contact p {font-size: 1.2rem;}
     html {scroll-behavior: smooth;}
+    .portfolio-detail {
+      display: none;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .portfolio-detail img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
   </style>
+  <script>
+    function showDetail(title, image, description) {
+      const detailSection = document.getElementById('portfolio-detail');
+      detailSection.innerHTML = `
+        <h3>${title}</h3>
+        <img src="${image}" alt="${title}">
+        <p>${description}</p>
+      `;
+      detailSection.style.display = 'block';
+      detailSection.scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
 </head>
 <body>
 
@@ -159,28 +154,27 @@
 
   <section id="portafolio">
     <h2>Portafolio</h2>
-    <div class="portfolio-container">
-      <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-      <div id="mainImage" class="portfolio-main">
-        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
+    <div class="portfolio-grid">
+      <div class="portfolio-item" onclick="showDetail('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial con enfoque minimalista y funcional.')">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Residencia Minimalista">
       </div>
-      <div class="portfolio-card">
-        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
+      <div class="portfolio-item" onclick="showDetail('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Diseño de oficinas corporativas modernas en CDMX.')">
+        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Oficinas Modernas">
       </div>
-      <div class="portfolio-card">
-        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 2">
+      <div class="portfolio-item" onclick="showDetail('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano con principios de sustentabilidad y bienestar social.')">
+        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Desarrollo Sustentable">
       </div>
-      <div class="portfolio-card">
-        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 3">
+      <div class="portfolio-item" onclick="showDetail('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa moderna frente al mar, diseñada para el confort y la integración con el entorno.')">
+        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Casa de Playa">
       </div>
-      <div class="portfolio-card">
-        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 4">
+      <div class="portfolio-item" onclick="showDetail('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre de oficinas con diseño minimalista y tecnología sustentable.')">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Torre Corporativa">
       </div>
-      <div class="portfolio-card">
-        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 5">
+      <div class="portfolio-item" onclick="showDetail('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural contemporáneo con áreas flexibles para exposiciones y eventos.')">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Centro Cultural">
       </div>
-      <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
     </div>
+    <div id="portfolio-detail" class="portfolio-detail"></div>
   </section>
 
   <section id="contacto">
@@ -191,30 +185,6 @@
       <p>Ubicación: Ciudad de México</p>
     </div>
   </section>
-
-  <script>
-    let currentIndex = 0;
-    const images = [
-      "https://images.unsplash.com/photo-1599423300746-b62533397364",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013",
-      "https://images.unsplash.com/photo-1600585154780-0c3f9584f26d",
-      "https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267"
-    ];
-
-    function moveSlide(step) {
-      currentIndex = (currentIndex + step + images.length) % images.length;
-      document.getElementById("mainImage").querySelector("img").src = images[currentIndex];
-      const cards = document.querySelectorAll(".portfolio-card");
-      cards.forEach((card, index) => {
-        if (index === currentIndex) {
-          card.style.transform = "scale(1.5)";
-        } else {
-          card.style.transform = "scale(1)";
-        }
-      });
-    }
-  </script>
 
 </body>
 </html>
