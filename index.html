@@ -42,7 +42,7 @@
       margin: auto;
     }
     h2 {font-size: 2.5rem; margin-bottom: 20px; color: #111;}
-    .services, .portfolio {
+    .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
@@ -57,6 +57,53 @@
     .card:hover {transform: translateY(-5px);}
     .card img {width: 100%; display: block;}
     .card-content {padding: 20px;}
+    .portfolio-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+    }
+    .portfolio-card {
+      flex: 0 0 auto;
+      width: 280px;
+      height: 200px;
+      perspective: 1000px;
+      scroll-snap-align: start;
+    }
+    .portfolio-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .portfolio-card:hover .portfolio-inner {
+      transform: rotateY(180deg);
+    }
+    .portfolio-front, .portfolio-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .portfolio-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .portfolio-back {
+      background: #ffa500;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transform: rotateY(180deg);
+      text-align: center;
+    }
     .contact p {font-size: 1.2rem;}
     html {scroll-behavior: smooth;}
   </style>
@@ -110,15 +157,106 @@
 
   <section id="portafolio">
     <h2>Portafolio</h2>
-    <div class="portfolio">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
+    <div class="portfolio-container">
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
+          </div>
+          <div class="portfolio-back">
+            Proyecto Residencial Minimalista
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 2">
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 2">
+          </div>
+          <div class="portfolio-back">
+            Oficinas Modernas CDMX
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 3">
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 3">
+          </div>
+          <div class="portfolio-back">
+            Desarrollo Urbano Sustentable
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 4">
+          </div>
+          <div class="portfolio-back">
+            Casa de Playa Moderna
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 5">
+          </div>
+          <div class="portfolio-back">
+            Torre Corporativa Minimal
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 6">
+          </div>
+          <div class="portfolio-back">
+            Espacio Cultural Moderno
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 7">
+          </div>
+          <div class="portfolio-back">
+            Departamento de Lujo CDMX
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 8">
+          </div>
+          <div class="portfolio-back">
+            Centro de Negocios Sustentable
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 9">
+          </div>
+          <div class="portfolio-back">
+            Loft Urbano Minimal
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-inner">
+          <div class="portfolio-front">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 10">
+          </div>
+          <div class="portfolio-back">
+            Parque Recreativo CDMX
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -134,3 +272,4 @@
 
 </body>
 </html>
+
