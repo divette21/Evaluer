@@ -1,7 +1,59 @@
-<nav>
-  <a href="inicio.html" target="_blank">Inicio</a>
-  <a href="sobremi.html" target="_blank">Sobre mí</a>
-  <a href="servicios.html" target="_blank">Servicios</a>
-  <a href="portafolio.html" target="_blank">Portafolio</a>
-  <a href="contacto.html" target="_blank">Contacto</a>
-</nav>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EArquitectura</title>
+  <style>
+    .tab {
+      display: none;
+    }
+    .tab.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <button onclick="showTab('inicio')">Inicio</button>
+    <button onclick="showTab('sobremi')">Sobre mí</button>
+    <button onclick="showTab('servicios')">Servicios</button>
+    <button onclick="showTab('portafolio')">Portafolio</button>
+    <button onclick="showTab('contacto')">Contacto</button>
+  </nav>
+
+  <div id="inicio" class="tab active">
+    <h1>Inicio</h1>
+    <p>Bienvenido a EArquitectura</p>
+  </div>
+
+  <div id="sobremi" class="tab">
+    <h1>Sobre mí</h1>
+    <p>Soy un arquitecto apasionado por el diseño...</p>
+  </div>
+
+  <div id="servicios" class="tab">
+    <h1>Servicios</h1>
+    <p>Diseño arquitectónico, renders y más.</p>
+  </div>
+
+  <div id="portafolio" class="tab">
+    <h1>Portafolio</h1>
+    <p>Aquí van mis proyectos.</p>
+  </div>
+
+  <div id="contacto" class="tab">
+    <h1>Contacto</h1>
+    <p>Correo: contacto@earquitectura.com</p>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
