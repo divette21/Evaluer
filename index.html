@@ -59,52 +59,54 @@
     .card-content {padding: 20px;}
     .portfolio-container {
       display: flex;
-      overflow-x: auto;
+      justify-content: center;
+      align-items: center;
       gap: 20px;
-      padding-bottom: 10px;
-      scroll-snap-type: x mandatory;
+      position: relative;
     }
     .portfolio-card {
       flex: 0 0 auto;
-      width: 280px;
-      height: 200px;
-      perspective: 1000px;
-      scroll-snap-align: start;
-    }
-    .portfolio-inner {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-      position: relative;
-    }
-    .portfolio-card:hover .portfolio-inner {
-      transform: rotateY(180deg);
-    }
-    .portfolio-front, .portfolio-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
+      width: 150px;
+      height: 100px;
+      transition: transform 0.5s ease;
       border-radius: 10px;
-      overflow: hidden;
     }
-    .portfolio-front img {
+    .portfolio-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 10px;
     }
-    .portfolio-back {
-      background: #ffa500;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      transform: rotateY(180deg);
-      text-align: center;
+    .portfolio-main {
+      width: 300px;
+      height: 200px;
+      border-radius: 15px;
+      transition: transform 0.5s ease;
     }
-    .contact p {font-size: 1.2rem;}
+    .portfolio-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 2rem;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .prev {
+      left: 0;
+    }
+    .next {
+      right: 0;
+    }
     html {scroll-behavior: smooth;}
   </style>
 </head>
@@ -158,106 +160,26 @@
   <section id="portafolio">
     <h2>Portafolio</h2>
     <div class="portfolio-container">
-      <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
-          </div>
-          <div class="portfolio-back">
-            Proyecto Residencial Minimalista
-          </div>
-        </div>
+      <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+      <div id="mainImage" class="portfolio-main">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 2">
-          </div>
-          <div class="portfolio-back">
-            Oficinas Modernas CDMX
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 1">
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 3">
-          </div>
-          <div class="portfolio-back">
-            Desarrollo Urbano Sustentable
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 2">
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 4">
-          </div>
-          <div class="portfolio-back">
-            Casa de Playa Moderna
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 3">
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 5">
-          </div>
-          <div class="portfolio-back">
-            Torre Corporativa Minimal
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 4">
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Proyecto 6">
-          </div>
-          <div class="portfolio-back">
-            Espacio Cultural Moderno
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 5">
       </div>
-      <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Proyecto 7">
-          </div>
-          <div class="portfolio-back">
-            Departamento de Lujo CDMX
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Proyecto 8">
-          </div>
-          <div class="portfolio-back">
-            Centro de Negocios Sustentable
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Proyecto 9">
-          </div>
-          <div class="portfolio-back">
-            Loft Urbano Minimal
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="portfolio-inner">
-          <div class="portfolio-front">
-            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Proyecto 10">
-          </div>
-          <div class="portfolio-back">
-            Parque Recreativo CDMX
-          </div>
-        </div>
-      </div>
+      <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
     </div>
   </section>
 
@@ -269,6 +191,30 @@
       <p>Ubicación: Ciudad de México</p>
     </div>
   </section>
+
+  <script>
+    let currentIndex = 0;
+    const images = [
+      "https://images.unsplash.com/photo-1599423300746-b62533397364",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013",
+      "https://images.unsplash.com/photo-1600585154780-0c3f9584f26d",
+      "https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267"
+    ];
+
+    function moveSlide(step) {
+      currentIndex = (currentIndex + step + images.length) % images.length;
+      document.getElementById("mainImage").querySelector("img").src = images[currentIndex];
+      const cards = document.querySelectorAll(".portfolio-card");
+      cards.forEach((card, index) => {
+        if (index === currentIndex) {
+          card.style.transform = "scale(1.5)";
+        } else {
+          card.style.transform = "scale(1)";
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
