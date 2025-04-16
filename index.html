@@ -3,13 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluer arquitectura</title>
+  <title>JP Arquitectura</title>
   <style>
     * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
-    body {color: #333; line-height: 1.6;}
+    body {color: #333; background: #fff;}
+    nav {
+      background: #111;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 999;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    nav button:hover {color: #ffa500;}
+    section {
+      display: none;
+      padding: 100px 20px 50px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section.active {display: block;}
     header {
-      background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
       height: 100vh;
+      background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -17,112 +43,54 @@
       color: #fff;
       text-align: center;
     }
-    header h1 {font-size: 4rem; margin-bottom: 10px;}
+    header h1 {font-size: 4rem;}
     header p {font-size: 1.5rem;}
-    nav {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      background: rgba(0,0,0,0.7);
-      padding: 10px 0;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      z-index: 999;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-    nav a:hover {color: #ffa500;}
-    section {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
     h2 {font-size: 2.5rem; margin-bottom: 20px; color: #111;}
-    .services {
+    .services, .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
-    .card {
+    .card, .portfolio-item {
       background: #f9f9f9;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       transition: transform 0.3s;
-    }
-    .card:hover {transform: translateY(-5px);}
-    .card img {width: 100%; display: block;}
-    .card-content {padding: 20px;}
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s;
     }
-    .portfolio-item:hover {
-      transform: scale(1.03);
-    }
-    .portfolio-item img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-    }
+    .card:hover, .portfolio-item:hover {transform: translateY(-5px);}
+    .card img, .portfolio-item img {width: 100%; display: block;}
+    .card-content {padding: 20px;}
     .contact p {font-size: 1.2rem;}
-    html {scroll-behavior: smooth;}
-    .portfolio-detail {
-      display: none;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    .portfolio-detail img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
   </style>
   <script>
-    function showDetail(title, image, description) {
-      const detailSection = document.getElementById('portfolio-detail');
-      detailSection.innerHTML = `
-        <h3>${title}</h3>
-        <img src="${image}" alt="${title}">
-        <p>${description}</p>
-      `;
-      detailSection.style.display = 'block';
-      detailSection.scrollIntoView({behavior: 'smooth'});
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('section, header');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      window.scrollTo(0,0);
     }
   </script>
 </head>
 <body>
 
   <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#sobremi">Sobre mí</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#portafolio">Portafolio</a>
-    <a href="#contacto">Contacto</a>
+    <button onclick="showSection('inicio')">Inicio</button>
+    <button onclick="showSection('sobremi')">Sobre mí</button>
+    <button onclick="showSection('servicios')">Servicios</button>
+    <button onclick="showSection('portafolio')">Portafolio</button>
+    <button onclick="showSection('contacto')">Contacto</button>
   </nav>
 
-  <header id="inicio">
-    <h1>Evaluer arquitectura</h1>
-    <p>Diseño arquitectónico moderno y funcional</p>
+  <header id="inicio" class="active">
+    <h1>JP Arquitectura</h1>
+    <p>Espacios modernos, funcionales y personalizados</p>
   </header>
 
   <section id="sobremi">
     <h2>Sobre mí</h2>
-    <p>Soy un arquitecto apasionado por crear espacios que combinan estética y funcionalidad. Mi objetivo es diseñar ambientes que inspiren y mejoren la calidad de vida de las personas.</p>
+    <p>Soy Juan Pérez, arquitecto con 10 años de experiencia en diseño residencial y comercial. Desde pequeño me apasionó transformar espacios y en 2013 fundé mi despacho “JP Arquitectura”, especializado en proyectos modernos que combinan funcionalidad y estética.</p>
   </section>
 
   <section id="servicios">
@@ -155,32 +123,22 @@
   <section id="portafolio">
     <h2>Portafolio</h2>
     <div class="portfolio-grid">
-      <div class="portfolio-item" onclick="showDetail('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial con enfoque minimalista y funcional.')">
+      <div class="portfolio-item">
         <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Residencia Minimalista">
       </div>
-      <div class="portfolio-item" onclick="showDetail('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Diseño de oficinas corporativas modernas en CDMX.')">
+      <div class="portfolio-item">
         <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Oficinas Modernas">
       </div>
-      <div class="portfolio-item" onclick="showDetail('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano con principios de sustentabilidad y bienestar social.')">
+      <div class="portfolio-item">
         <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Desarrollo Sustentable">
       </div>
-      <div class="portfolio-item" onclick="showDetail('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa moderna frente al mar, diseñada para el confort y la integración con el entorno.')">
-        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Casa de Playa">
-      </div>
-      <div class="portfolio-item" onclick="showDetail('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre de oficinas con diseño minimalista y tecnología sustentable.')">
-        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Torre Corporativa">
-      </div>
-      <div class="portfolio-item" onclick="showDetail('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural contemporáneo con áreas flexibles para exposiciones y eventos.')">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Centro Cultural">
-      </div>
     </div>
-    <div id="portfolio-detail" class="portfolio-detail"></div>
   </section>
 
   <section id="contacto">
     <h2>Contacto</h2>
     <div class="contact">
-      <p>Email: contacto@earquitectura.com</p>
+      <p>Email: contacto@jparquitectura.com</p>
       <p>Teléfono: +52 555 123 4567</p>
       <p>Ubicación: Ciudad de México</p>
     </div>
