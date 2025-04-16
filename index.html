@@ -34,8 +34,8 @@
       background: #ff7300;
     }
 
-    /* Header (solo para Inicio) */
-    header {
+    /* Header SOLO para Inicio */
+    #inicio {
       background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
       height: 100vh;
       display: flex;
@@ -53,32 +53,36 @@
       font-size: 1.5rem;
     }
 
-    /* Títulos de sección */
-    .section-title {
-      font-size: 1.8rem; /* Más pequeño que en el header */
-      color: #333;
-      margin: 10px 0 30px;
+    /* Encabezado de secciones (servicios, portafolio, contacto) */
+    .section-header {
+      padding: 60px 20px 30px;
       text-align: center;
-      font-weight: normal;
     }
-
-    /* Secciones */
-    section { 
-      display: none; 
-      padding: 80px 20px 50px; 
-      max-width: 1000px; 
-      margin: auto; 
-    }
-    section.active { display: block; }
-
-    h2 { 
-      font-size: 2rem; 
-      margin-bottom: 20px; 
+    .section-header h1 {
+      font-size: 2rem;
       color: #222;
-      text-align: center;
+      margin-bottom: 10px;
     }
 
     /* Contenido de secciones */
+    section { 
+      display: none; 
+      max-width: 1000px; 
+      margin: auto;
+    }
+    section.active { display: block; }
+
+    .section-content {
+      padding: 0 20px 50px;
+    }
+
+    h2 { 
+      font-size: 1.8rem; 
+      margin-bottom: 20px; 
+      color: #444;
+    }
+
+    /* Contenido específico */
     .services, .portfolio-grid {
       display: grid;
       gap: 20px;
@@ -152,70 +156,83 @@
   <button onclick="showSection('contacto')">Contacto</button>
 </nav>
 
+<!-- Solo el inicio tiene el encabezado con imagen -->
 <header id="inicio" class="active">
   <h1 class="big-title">JP Arquitectura</h1>
   <p class="header-subtitle">Diseño arquitectónico moderno y funcional</p>
 </header>
 
+<!-- Servicios - Encabezado simple -->
 <section id="servicios">
-  <h1 class="section-title">JP Arquitectura</h1>
-  <h2>Servicios</h2>
-  <div class="services">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Diseño Arquitectónico">
-      <div class="card-content">
-        <h3>Diseño Arquitectónico</h3>
-        <p>Proyectos residenciales, comerciales y corporativos personalizados.</p>
+  <div class="section-header">
+    <h1>Servicios</h1>
+  </div>
+  <div class="section-content">
+    <div class="services">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Diseño Arquitectónico">
+        <div class="card-content">
+          <h3>Diseño Arquitectónico</h3>
+          <p>Proyectos residenciales, comerciales y corporativos personalizados.</p>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Renders 3D">
-      <div class="card-content">
-        <h3>Renders 3D</h3>
-        <p>Visualizaciones hiperrealistas para presentar tus ideas de forma impactante.</p>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Renders 3D">
+        <div class="card-content">
+          <h3>Renders 3D</h3>
+          <p>Visualizaciones hiperrealistas para presentar tus ideas de forma impactante.</p>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Planificación Urbana">
-      <div class="card-content">
-        <h3>Planificación Urbana</h3>
-        <p>Desarrollo de proyectos urbanos con enfoque sustentable y social.</p>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Planificación Urbana">
+        <div class="card-content">
+          <h3>Planificación Urbana</h3>
+          <p>Desarrollo de proyectos urbanos con enfoque sustentable y social.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Portafolio - Encabezado simple -->
 <section id="portafolio">
-  <h1 class="section-title">JP Arquitectura</h1>
-  <h2>Portafolio</h2>
-  <div class="portfolio-grid">
-    <div class="portfolio-item" onclick="showModal('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial minimalista.')">
-      <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Oficinas corporativas en CDMX.')">
-      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano sustentable.')">
-      <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa frente al mar.')">
-      <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre minimalista y sustentable.')">
-      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural flexible.')">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="">
+  <div class="section-header">
+    <h1>Portafolio</h1>
+  </div>
+  <div class="section-content">
+    <div class="portfolio-grid">
+      <div class="portfolio-item" onclick="showModal('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial minimalista.')">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="">
+      </div>
+      <div class="portfolio-item" onclick="showModal('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Oficinas corporativas en CDMX.')">
+        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="">
+      </div>
+      <div class="portfolio-item" onclick="showModal('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano sustentable.')">
+        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="">
+      </div>
+      <div class="portfolio-item" onclick="showModal('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa frente al mar.')">
+        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="">
+      </div>
+      <div class="portfolio-item" onclick="showModal('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre minimalista y sustentable.')">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="">
+      </div>
+      <div class="portfolio-item" onclick="showModal('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural flexible.')">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="">
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Contacto - Encabezado simple -->
 <section id="contacto">
-  <h1 class="section-title">JP Arquitectura</h1>
-  <h2>Contacto</h2>
-  <p>Email: contacto@jparquitectura.com</p>
-  <p>Teléfono: +52 555 123 4567</p>
-  <p>Ubicación: Ciudad de México</p>
+  <div class="section-header">
+    <h1>Contacto</h1>
+  </div>
+  <div class="section-content">
+    <p>Email: contacto@jparquitectura.com</p>
+    <p>Teléfono: +52 555 123 4567</p>
+    <p>Ubicación: Ciudad de México</p>
+  </div>
 </section>
 
 <div class="modal" id="modal">
