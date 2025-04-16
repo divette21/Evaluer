@@ -7,6 +7,8 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
     body { color: #333; line-height: 1.6; background: #fafafa; }
+    
+    /* Navegación */
     nav {
       background: #111;
       padding: 10px 0;
@@ -32,6 +34,7 @@
       background: #ff7300;
     }
 
+    /* Header (solo para Inicio) */
     header {
       background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
       height: 100vh;
@@ -43,28 +46,39 @@
       text-align: center;
     }
     .big-title { 
-      font-size: 5rem; 
+      font-size: 5rem;
+      margin-bottom: 20px;
     }
-    .small-title { 
-      font-size: 2.5rem; 
-      padding: 20px; 
-    }
-    .smaller-title {
-      font-size: 1.8rem;
-      padding: 10px 0;
-      margin-bottom: 10px;
+    .header-subtitle {
+      font-size: 1.5rem;
     }
 
+    /* Títulos de sección */
+    .section-title {
+      font-size: 1.8rem; /* Más pequeño que en el header */
+      color: #333;
+      margin: 10px 0 30px;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    /* Secciones */
     section { 
       display: none; 
-      padding: 100px 20px 50px; 
+      padding: 80px 20px 50px; 
       max-width: 1000px; 
       margin: auto; 
     }
     section.active { display: block; }
 
-    h2 { font-size: 2rem; margin-bottom: 20px; color: #222; }
+    h2 { 
+      font-size: 2rem; 
+      margin-bottom: 20px; 
+      color: #222;
+      text-align: center;
+    }
 
+    /* Contenido de secciones */
     .services, .portfolio-grid {
       display: grid;
       gap: 20px;
@@ -140,11 +154,11 @@
 
 <header id="inicio" class="active">
   <h1 class="big-title">JP Arquitectura</h1>
-  <p>Diseño arquitectónico moderno y funcional</p>
+  <p class="header-subtitle">Diseño arquitectónico moderno y funcional</p>
 </header>
 
 <section id="servicios">
-  <h1 class="small-title smaller-title">JP Arquitectura</h1>
+  <h1 class="section-title">JP Arquitectura</h1>
   <h2>Servicios</h2>
   <div class="services">
     <div class="card">
@@ -172,7 +186,7 @@
 </section>
 
 <section id="portafolio">
-  <h1 class="small-title smaller-title">JP Arquitectura</h1>
+  <h1 class="section-title">JP Arquitectura</h1>
   <h2>Portafolio</h2>
   <div class="portfolio-grid">
     <div class="portfolio-item" onclick="showModal('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial minimalista.')">
@@ -197,7 +211,7 @@
 </section>
 
 <section id="contacto">
-  <h1 class="small-title smaller-title">JP Arquitectura</h1>
+  <h1 class="section-title">JP Arquitectura</h1>
   <h2>Contacto</h2>
   <p>Email: contacto@jparquitectura.com</p>
   <p>Teléfono: +52 555 123 4567</p>
@@ -215,29 +229,13 @@
 
 <script>
   function showSection(sectionId) {
+    // Ocultar todas las secciones
     document.querySelectorAll('section, header').forEach(sec => {
       sec.classList.remove('active');
-      
-      // Restablecer los títulos a su tamaño original cuando se cambia de sección
-      const titles = sec.querySelectorAll('h1');
-      titles.forEach(title => {
-        if (title.classList.contains('smaller-title')) {
-          title.classList.remove('smaller-title');
-          title.classList.add('small-title');
-        }
-      });
     });
     
+    // Mostrar la sección seleccionada
     document.getElementById(sectionId).classList.add('active');
-    
-    // Aplicar el tamaño más pequeño a los títulos en todas las secciones excepto inicio
-    if (sectionId !== 'inicio') {
-      const titles = document.querySelectorAll(`#${sectionId} h1`);
-      titles.forEach(title => {
-        title.classList.remove('small-title');
-        title.classList.add('smaller-title');
-      });
-    }
   }
 
   function showModal(title, img, desc) {
