@@ -32,7 +32,7 @@
     }
 
     header {
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -40,23 +40,16 @@
       background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
       height: 100vh;
       padding: 20px;
-      transition: opacity 0.5s ease;
     }
 
-    .big-title, .subtitulo {
-      color: #fff;
-      transition: opacity 0.5s ease;
-    }
     .big-title {
+      color: #fff;
       font-size: 4rem;
       margin-bottom: 10px;
     }
     .subtitulo {
+      color: #fff;
       font-size: 1.5rem;
-    }
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
     }
 
     section {
@@ -66,6 +59,7 @@
       margin: 100px auto 0;
     }
     section.active {display: block;}
+    header.active {display: flex;}
 
     h2 {font-size: 2.5rem; margin-bottom: 20px; color: #111;}
 
@@ -129,7 +123,7 @@
     <button onclick="showSection('contacto')">Contacto</button>
   </nav>
 
-  <header id="inicio" class="active">
+  <header id="header">
     <h1 class="big-title">JP Arquitectura</h1>
     <p class="subtitulo">Diseño arquitectónico moderno y funcional</p>
   </header>
@@ -197,18 +191,14 @@
 
   <script>
     function showSection(sectionId) {
-      document.querySelectorAll('section, header').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(sectionId).classList.add('active');
 
-      const title = document.querySelector('.big-title');
-      const subtitle = document.querySelector('.subtitulo');
-
+      const header = document.getElementById('header');
       if (sectionId === 'inicio') {
-        title.classList.remove('hidden');
-        subtitle.classList.remove('hidden');
+        header.classList.add('active');
       } else {
-        title.classList.add('hidden');
-        subtitle.classList.add('hidden');
+        header.classList.remove('active');
       }
     }
 
@@ -222,6 +212,9 @@
       detailSection.style.display = 'block';
       detailSection.scrollIntoView({behavior: 'smooth'});
     }
+
+    // Al cargar, mostrar inicio
+    showSection('inicio');
   </script>
 
 </body>
