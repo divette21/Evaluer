@@ -2,219 +2,227 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JP Arquitectura</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { color: #333; line-height: 1.6; background: #fafafa; }
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
+    body {color: #333; background: #fff;}
     nav {
-      background: #111;
-      padding: 10px 0;
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: #222;
       display: flex;
       justify-content: center;
-      gap: 20px;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
+      gap: 30px;
+      padding: 12px 0;
+      z-index: 999;
     }
     nav button {
-      background: #ffa500;
+      background: none;
       border: none;
       color: #fff;
-      padding: 10px 20px;
-      border-radius: 30px;
-      cursor: pointer;
       font-size: 1rem;
-      transition: 0.3s;
+      cursor: pointer;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding: 8px 16px;
     }
     nav button:hover {
-      background: #ff7300;
+      color: #ffa500;
+      border-bottom: 2px solid #ffa500;
     }
 
     header {
-      background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
-      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #fff;
       text-align: center;
+      background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29') no-repeat center center/cover;
+      height: 100vh;
+      padding: 20px;
+      transition: opacity 0.5s ease;
     }
-    .big-title { font-size: 5rem; }
-    .small-title { font-size: 2.5rem; padding: 20px; }
 
-    section { display: none; padding: 100px 20px 50px; max-width: 1000px; margin: auto; }
-    section.active { display: block; }
+    .big-title, .subtitulo {
+      color: #fff;
+      transition: opacity 0.5s ease;
+    }
+    .big-title {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+    .subtitulo {
+      font-size: 1.5rem;
+    }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-    h2 { font-size: 2rem; margin-bottom: 20px; color: #222; }
+    section {
+      display: none;
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 100px auto 0;
+    }
+    section.active {display: block;}
 
-    .services, .portfolio-grid {
+    h2 {font-size: 2.5rem; margin-bottom: 20px; color: #111;}
+
+    .services {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
-    .services { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
-
-    .card, .portfolio-item {
-      background: #fff;
+    .card {
+      background: #f9f9f9;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .card:hover, .portfolio-item:hover { transform: translateY(-5px); }
+    .card:hover {transform: translateY(-5px);}
+    .card img {width: 100%; display: block;}
+    .card-content {padding: 20px;}
 
-    .card img, .portfolio-item img { width: 100%; display: block; }
-
-    .card-content { padding: 20px; }
-    .portfolio-item { position: relative; }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    .modal-content {
-      background: #fff;
-      padding: 20px;
-      max-width: 600px;
-      border-radius: 10px;
-      text-align: center;
+    .portfolio-item {
       position: relative;
-    }
-    .modal-content img {
-      max-width: 100%;
+      overflow: hidden;
       border-radius: 10px;
-      margin-bottom: 15px;
+      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .modal-content h3 {
+    .portfolio-item:hover {transform: scale(1.05);}
+    .portfolio-item img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .portfolio-detail {
+      display: none;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .portfolio-detail img {
+      width: 100%;
+      border-radius: 10px;
       margin-bottom: 10px;
     }
-    .close-btn {
-      position: absolute;
-      top: 10px; right: 15px;
-      background: #ffa500;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
+    .contact p {font-size: 1.2rem;}
   </style>
 </head>
 <body>
 
-<nav>
-  <button onclick="showSection('inicio')">Inicio</button>
-  <button onclick="showSection('servicios')">Servicios</button>
-  <button onclick="showSection('portafolio')">Portafolio</button>
-  <button onclick="showSection('contacto')">Contacto</button>
-</nav>
+  <nav>
+    <button onclick="showSection('inicio')">Inicio</button>
+    <button onclick="showSection('servicios')">Servicios</button>
+    <button onclick="showSection('portafolio')">Portafolio</button>
+    <button onclick="showSection('contacto')">Contacto</button>
+  </nav>
 
-<header id="inicio" class="active">
-  <h1 class="big-title">JP Arquitectura</h1>
-  <p>Diseño arquitectónico moderno y funcional</p>
-</header>
+  <header id="inicio" class="active">
+    <h1 class="big-title">JP Arquitectura</h1>
+    <p class="subtitulo">Diseño arquitectónico moderno y funcional</p>
+  </header>
 
-<section id="servicios">
-  <h1 class="small-title">JP Arquitectura</h1>
-  <h2>Servicios</h2>
-  <div class="services">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Diseño Arquitectónico">
-      <div class="card-content">
-        <h3>Diseño Arquitectónico</h3>
-        <p>Proyectos residenciales, comerciales y corporativos personalizados.</p>
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="services">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" alt="Diseño arquitectónico">
+        <div class="card-content">
+          <h3>Diseño Arquitectónico</h3>
+          <p>Proyectos residenciales, comerciales y corporativos personalizados.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Renders 3D">
+        <div class="card-content">
+          <h3>Renders 3D</h3>
+          <p>Visualizaciones hiperrealistas para presentar tus ideas de forma impactante.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Planificación Urbana">
+        <div class="card-content">
+          <h3>Planificación Urbana</h3>
+          <p>Proyectos urbanos con enfoque sustentable y social.</p>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Renders 3D">
-      <div class="card-content">
-        <h3>Renders 3D</h3>
-        <p>Visualizaciones hiperrealistas para presentar tus ideas de forma impactante.</p>
+  </section>
+
+  <section id="portafolio">
+    <h2>Portafolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" onclick="showDetail('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial con enfoque minimalista y funcional.')">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="Residencia Minimalista">
+      </div>
+      <div class="portfolio-item" onclick="showDetail('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Diseño de oficinas corporativas modernas.')">
+        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="Oficinas Modernas">
+      </div>
+      <div class="portfolio-item" onclick="showDetail('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano con principios de sustentabilidad.')">
+        <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="Desarrollo Sustentable">
+      </div>
+      <div class="portfolio-item" onclick="showDetail('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa moderna frente al mar, diseñada para confort.')">
+        <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="Casa de Playa">
+      </div>
+      <div class="portfolio-item" onclick="showDetail('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre de oficinas con tecnología sustentable.')">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Torre Corporativa">
+      </div>
+      <div class="portfolio-item" onclick="showDetail('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural contemporáneo flexible.')">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Centro Cultural">
       </div>
     </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Planificación Urbana">
-      <div class="card-content">
-        <h3>Planificación Urbana</h3>
-        <p>Desarrollo de proyectos urbanos con enfoque sustentable y social.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div id="portfolio-detail" class="portfolio-detail"></div>
+  </section>
 
-<section id="portafolio">
-  <h1 class="small-title">JP Arquitectura</h1>
-  <h2>Portafolio</h2>
-  <div class="portfolio-grid">
-    <div class="portfolio-item" onclick="showModal('Residencia Minimalista', 'https://images.unsplash.com/photo-1599423300746-b62533397364', 'Proyecto residencial minimalista.')">
-      <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="">
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="contact">
+      <p>Email: contacto@jparquitectura.com</p>
+      <p>Teléfono: +52 555 123 4567</p>
+      <p>Ubicación: Ciudad de México</p>
     </div>
-    <div class="portfolio-item" onclick="showModal('Oficinas Modernas', 'https://images.unsplash.com/photo-1618220179428-22790b461013', 'Oficinas corporativas en CDMX.')">
-      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Desarrollo Sustentable', 'https://images.unsplash.com/photo-1600585154780-0c3f9584f26d', 'Proyecto urbano sustentable.')">
-      <img src="https://images.unsplash.com/photo-1600585154780-0c3f9584f26d" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Casa de Playa', 'https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef', 'Casa frente al mar.')">
-      <img src="https://images.unsplash.com/photo-1600607686996-c6f57b0ba1ef" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Torre Corporativa', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267', 'Torre minimalista y sustentable.')">
-      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="">
-    </div>
-    <div class="portfolio-item" onclick="showModal('Centro Cultural', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', 'Espacio cultural flexible.')">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="">
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="contacto">
-  <h1 class="small-title">JP Arquitectura</h1>
-  <h2>Contacto</h2>
-  <p>Email: contacto@jparquitectura.com</p>
-  <p>Teléfono: +52 555 123 4567</p>
-  <p>Ubicación: Ciudad de México</p>
-</section>
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('section, header').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
 
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <img id="modal-img" src="">
-    <h3 id="modal-title"></h3>
-    <p id="modal-desc"></p>
-  </div>
-</div>
+      const title = document.querySelector('.big-title');
+      const subtitle = document.querySelector('.subtitulo');
 
-<script>
-  function showSection(sectionId) {
-    document.querySelectorAll('section, header').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
-  }
+      if (sectionId === 'inicio') {
+        title.classList.remove('hidden');
+        subtitle.classList.remove('hidden');
+      } else {
+        title.classList.add('hidden');
+        subtitle.classList.add('hidden');
+      }
+    }
 
-  function showModal(title, img, desc) {
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('modal-img').src = img;
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-desc').innerText = desc;
-  }
-
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-  }
-</script>
+    function showDetail(title, image, description) {
+      const detailSection = document.getElementById('portfolio-detail');
+      detailSection.innerHTML = `
+        <h3>${title}</h3>
+        <img src="${image}" alt="${title}">
+        <p>${description}</p>
+      `;
+      detailSection.style.display = 'block';
+      detailSection.scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
 
 </body>
 </html>
